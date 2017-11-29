@@ -2,10 +2,12 @@ pragma solidity ^0.4.0;
 
 import "./ERC20.sol";
 import "./ConvertLib.sol";
+import "./SafeMath.sol";
 
 
 contract GoatCoin is ERC20 {
 
+    using SafeMath for uint256;
     uint public INITIAL_SUPPLY = 20000;
 
     // This creates an array with all balances
@@ -32,7 +34,7 @@ contract GoatCoin is ERC20 {
     }
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
         require(_value <= allowed[_from][msg.sender]);     // Check allowance
-        allowed[_from][msg.sender] -= _value;
+        allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
         _transfer(_from, _to, _value);
         return true;
     }
@@ -58,9 +60,9 @@ contract GoatCoin is ERC20 {
         // Save this for an assertion in the future
         uint previousBalances = balances[_from] + balances[_to];
         // Subtract from the sender
-        balances[_from] -= _value;
+        balances[_from] = balances[_from].sub(_value);
         // Add the same to the recipient
-        balances[_to] += _value;
+        balances[_to] = balances[_to].add(_value);
         Transfer(_from, _to, _value);
         // Asserts are used to use static analysis to find bugs in your code. They should never fail
         assert(balances[_from] + balances[_to] == previousBalances);
