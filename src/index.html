@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoatCoin Simple Client</title>
+  <script src="./app.js"></script>
+</head>
+<body>
+    <header>
+        <h1 id="title">The GoatCoin</h1>
+    </header>
+    <main>
+        <section id="wallet-panel">
+            <h2>Your wallet</h2>
+            <h3><span id="balance"></span>G.O.A.T</h3>
+        </section>
+        <section id="transfer-panel">
+            <h2>Send GoatCoins for no reason at all</h2>
+            <div class="form-group">
+                <label for="amount">Amount:</label><input type="text" id="amount" placeholder="e.g., 95" class="form-control">
+                <label for="receiver">To Address:</label><input type="text" id="receiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae" class="form-control">
+                <button id="transfer" onclick="App.transfer()" class="btn btn-primary">Send GoatCoin</button>
+                <span id="status"></span>
+            </div>
+
+        </section>
+    </main>
+
+</body>
+</html>
